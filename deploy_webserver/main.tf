@@ -74,7 +74,7 @@ resource "azurerm_public_ip" "publicip" {
   }
 
 data "azurerm_public_ip" "publicip" {
-  name                = azurerm_public_ip.publicip.[count.index]
+  name                = azurerm_public_ip.publicip.name[count.index]
   resource_group_name = azurerm_resource_group.rg.name
 }
 
@@ -91,7 +91,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.resource_prefix}webserver${count.index}-nicconfig"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = azurerm_public_ip.publicip.[count.index]
+    public_ip_address_id          = azurerm_public_ip.publicip.id[count.index]
   }
 }
 
