@@ -102,7 +102,7 @@ resource "azurerm_virtual_machine" "vm" {
   name                  = "${var.resource_prefix}webserver${count.index}-vm"
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.nic.id]
+  network_interface_ids = azurerm_network_interface.nic[count.index].id
   vm_size               = "Standard_DS2_v2"
 
   storage_os_disk {
