@@ -70,16 +70,16 @@ resource "azurerm_network_security_group" "nsg" {
 
 resource "azurerm_virtual_network_peering" "peer1" {
   name                      = "peer_tfdemo_to_tfnsdemo"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
-  remote_virtual_network_id = "${azurerm_virtual_network.tfnsdemovnet.id}"
+  resource_group_name       = azurerm_resource_group.rg.name
+  virtual_network_name      = azurerm_virtual_network.vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.tfnsdemovnet.id
 }
 
 resource "azurerm_virtual_network_peering" "peer2" {
   name                      = "peer_tfnsdemo_to_tfdemo"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  virtual_network_name      = "${azurerm_virtual_network.tfnsdemovnet.name}"
-  remote_virtual_network_id = "${azurerm_virtual_network.vnet.id}"
+  resource_group_name       = azurerm_resource_group.rg.name
+  virtual_network_name      = azurerm_virtual_network.tfnsdemovnet.name
+  remote_virtual_network_id = azurerm_virtual_network.vnet.id
 }
 
 # Create public IP
