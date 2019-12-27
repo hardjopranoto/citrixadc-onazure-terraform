@@ -17,6 +17,10 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
+# This tfnsdemovnet must exist prior to running this script and must be imported
+resource "azurerm_virtual_network" "tfnsdemovnet" {
+}
+
 # Create virtual network
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_prefix}-vnet"
@@ -62,6 +66,20 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+}
+
+resource "azurerm_virtual_network_peering" "peer1" {
+  name                      = "peer_tfdemo_to_tfnsdemo"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+  remote_virtual_network_id = "${azurerm_virtual_network.tfnsdemovnet.id}"
+}
+
+resource "azurerm_virtual_network_peering" "peer2" {
+  name                      = "peer_tfnsdemo_to_tfdemo"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  virtual_network_name      = "${azurerm_virtual_network.tfnsdemovnet.name}"
+  remote_virtual_network_id = "${azurerm_virtual_network.vnet.id}"
 }
 
 # Create public IP
