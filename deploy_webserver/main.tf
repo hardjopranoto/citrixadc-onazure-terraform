@@ -133,7 +133,7 @@ resource "azurerm_virtual_machine" "vm" {
   provisioner "file" {
     connection {
       count    = 2
-      host     = azurerm_public_ip.publicip.ip_address
+      host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
       password = var.admin_password
@@ -146,7 +146,7 @@ resource "azurerm_virtual_machine" "vm" {
   provisioner "file" {
     connection {
       count    = 2
-      host     = azurerm_public_ip.publicip.ip_address
+      host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
       password = var.admin_password
@@ -160,7 +160,7 @@ resource "azurerm_virtual_machine" "vm" {
   provisioner "remote-exec" {
     connection {
       count    = 2
-      host     = azurerm_public_ip.publicip.ip_address
+      host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
       password = var.admin_password
