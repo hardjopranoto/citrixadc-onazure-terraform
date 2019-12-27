@@ -132,7 +132,6 @@ resource "azurerm_virtual_machine" "vm" {
 # Copying index.html and index.js to the VM
   provisioner "file" {
     connection {
-      count    = 2
       host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
@@ -145,7 +144,6 @@ resource "azurerm_virtual_machine" "vm" {
 
   provisioner "file" {
     connection {
-      count    = 2
       host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
@@ -159,7 +157,6 @@ resource "azurerm_virtual_machine" "vm" {
 # Installing NGINX webserver and moving index.hmtl and index.js to the appropriate directory
   provisioner "remote-exec" {
     connection {
-      count    = 2
       host     = azurerm_public_ip.publicip[count.index].ip_address
       type     = "ssh"
       user     = var.admin_username
