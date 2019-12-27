@@ -74,7 +74,7 @@ resource "azurerm_public_ip" "publicip" {
   }
 
 data "azurerm_public_ip" "publicip" {
-  name                = azurerm_public_ip.publicip.name
+  name                = azurerm_public_ip.publicip.[count.index]
   resource_group_name = azurerm_resource_group.rg.name
 }
 
@@ -91,7 +91,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.resource_prefix}webserver${count.index}-nicconfig"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = azurerm_public_ip.publicip.id
+    public_ip_address_id          = azurerm_public_ip.publicip.[count.index]
   }
 }
 
@@ -183,24 +183,4 @@ resource "azurerm_virtual_machine" "vm" {
     ]
   }
 }
-
-# Displaying the hostname, public ip, private ip for reference
-output hostname {
-  value = azurerm_virtual_machine.vm.name
-}
-
-output public_ip {
-  value = azurerm_public_ip.publicip.ip_address
-}
-
-output private_ip {
-  value = azurerm_network_interface.nic.private_ip_address
-}
-output admin_username {
-  value = var.admin_username
-}
-
-output admin_password {
-  value = var.admin_password
-}
-                                
+                               
