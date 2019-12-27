@@ -18,12 +18,16 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_resource_group" "tfnsdemorg" {
+  name     = "tfnsdemo_rg"
+  location = var.location
 }
 
 # This tfnsdemovnet must exist prior to running this script and must be imported
 resource "azurerm_virtual_network" "tfnsdemovnet" {
-  name     = "tfnsdemo-vnet"
-  location = var.location
+  name                = "tfnsdemo-vnet"
+  location            = var.location
+  address_space       = ["10.10.0.0/16"]
+  resource_group_name = azurerm_resource_group.tfnsdemorg.name
 }
 
 # Create virtual network
