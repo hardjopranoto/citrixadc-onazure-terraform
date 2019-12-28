@@ -1,3 +1,6 @@
+provider "azurerm" {
+  version = "~>1.31"
+}
 provisioner "local-exec" {
   command = <<EOT
     az network vnet peering create
