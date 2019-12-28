@@ -14,6 +14,7 @@ variable "admin_password" {
 
 variable "resource_prefix" {
   type = string
+  default = "tfdemo"
 }
 
 # You'll usually want to set this to a region near you.
