@@ -1,3 +1,1 @@
-variable "location" {
-  default = "australiaeast"
-}
+
