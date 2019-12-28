@@ -2,6 +2,19 @@
 # then configure simple server load balancing on the netscaler
 # it is assumed that the webservers and netscaler have already been provisioned\
 
+# Configure the provider.
+provider "azurerm" {
+  version = "~>1.31"
+}
+
+
+provider "citrixadc" {
+  username = "ctxadmin"
+  password = "CtxPa55w0rd!"
+  endpoint = "http://52.156.166.49/"
+}
+
+
 # This resource will need to be imported
 resource "azurerm_resource_group" "tfdemorg" {
   name     = "tfdemo_rg"
