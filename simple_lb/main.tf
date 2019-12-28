@@ -29,12 +29,16 @@ resource "azurerm_resource_group" "tfnsdemorg" {
 
 # This resource will need to be imported
 resource "azurerm_virtual_network" "tfnsdemovnet" {
+  location            = "australiaeast"
+  name                = "tfnsdemo-vnet"
   address_space       = ["10.10.0.0/16"]
   resource_group_name = azurerm_resource_group.tfnsdemorg.name
 }
 
 # This resource will need to be imported
 resource "azurerm_virtual_network" "tfdemovnet" {
+  location            = "australiaeast"
+  name                = "tfdemo-vnet"
   address_space       = ["10.11.0.0/16"]
   resource_group_name = azurerm_resource_group.tfdemorg.name
 }
