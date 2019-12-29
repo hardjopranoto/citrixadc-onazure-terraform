@@ -23,6 +23,27 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 `git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git`
 
+2. Deploy Citrix ADC by running the following commands
+
+```
+cd citrixadc-onazure-terraform/deploy_adc
+terraform init
+terraform plan
+terraform apply
+```
+
+3. Deploy two Ubuntu linux VMs, install NGINX webserver and customise the HTML page
+
+```
+cd citrixadc-onazure-terraform/deploy_webserver
+terraform init
+terraform plan
+terraform apply
+```
+
+
+
+
 
 
 
