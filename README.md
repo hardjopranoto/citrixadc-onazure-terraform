@@ -8,7 +8,7 @@ This is a sample infrastructure-as-code project to showcase the deployment of Ci
 ## Requirements
 - Terraform
 - Azure subscription
-- ![Terraform Provider for Citrix ADC](https://github.com/citrix/terraform-provider-citrixadc)
+- [Terraform Provider for Citrix ADC](https://github.com/citrix/terraform-provider-citrixadc)
 - Azure Cloud Shell (optional)
 
 In order to use this repository, you will need to deploy the above listed tools. We will use Terraform to provision Citrix ADC from Azure Marketplace (it is assumed that you have your Azure subscription that you can use). You can deploy Terraform tool on a Linux server or alternatively you can use Azure Cloud Shell.
