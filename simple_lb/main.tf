@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "citrixadc" {
-  username = "ctxadmin"
+  username = "nsroot"
   password = "CtxPa55w0rd!"
   endpoint = "http://13.73.203.23/"
 }
