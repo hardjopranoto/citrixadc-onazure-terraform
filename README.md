@@ -15,9 +15,14 @@ In order to use this repository, you will need to deploy the above listed tools.
 
 I personally like to use the Azure Cloud Shell for the convenience that Terraform is already installed and it is maintained and kept up to date by Microsoft. Please follow this instruction to set up Azure Cloud Shell for the first time. https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart
 
+You also need to copy the [Terraform Provider for Citrix ADC](https://github.com/citrix/terraform-provider-citrixadc) binary to your Azure Cloud Shell by following the usage instruction.
+
 ## Usage
 
 1. Open Azure Cloud Shell and clone this repository by running the following commands
+> git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git
+
+
 
 
 
