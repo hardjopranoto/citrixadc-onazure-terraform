@@ -20,8 +20,7 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 ## Usage
 
 1. Open Azure Cloud Shell and clone this repository by running the following commands
-> git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git
-
+`git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git`
 
 
 
