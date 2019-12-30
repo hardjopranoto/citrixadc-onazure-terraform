@@ -26,7 +26,7 @@ This subfolder contains specific example of configuring a simple load balance co
 (lines removed for brevity)
 ```
 
-Where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
+  Where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
 
 
 2. Edit `main.tf` and update the content of `main.tf` file
