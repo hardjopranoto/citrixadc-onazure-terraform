@@ -31,12 +31,12 @@ Where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC ma
 
 2. Edit `main.tf` and update the content of `main.tf` file
 
-  - Open Azure Cloud Shell text editor by running the command `code main.tf`
-  - Update the `endpoint` URL with the public IP address you obtain in Step 1 above
-  - Update `username` of Citrix ADC admin username if necessary
-  - Update `password` of Citrix ADC admin password if necessary
-  - `Ctrl+S` to save the file
-  - `Ctrl+Q` to close the text editor
+    - Open Azure Cloud Shell text editor by running the command `code main.tf`
+    - Update the `endpoint` URL with the public IP address you obtain in Step 1 above
+    - Update `username` of Citrix ADC admin username if necessary
+    - Update `password` of Citrix ADC admin password if necessary
+    - `Ctrl+S` to save the file
+    - `Ctrl+Q` to close the text editor
 
 
 3. `terraform init`
