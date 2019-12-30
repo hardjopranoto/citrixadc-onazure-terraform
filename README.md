@@ -31,6 +31,38 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 5. Create a simple load balancing configuration on the two webservers deployed in Step 3 by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/tree/master/simple_lb)
 
+6. Commit the configuration to Citrix ADC persistent store. To do that, run the following commands
+
+```
+export NS_URL=http://<host>:<port>/
+export NS_USER=nsroot
+export NS_PASSWORD=nspassword
+./ns_commit.sh
+```
+
+
+## Validate
+Run through the following steps to validate if the deployments have been done correctly and successfully
+
+1. Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-wanPIP` to obtain `a.b.c.d` which is the public VIP address
+
+```
+(lines removed for brevity)
+  "ddosSettings": null,
+  "dnsSettings": null,
+  "etag": "W/\"731df655-ba5e-46dc-9e8c-ae5618096a2c\"",
+  "id": "/subscriptions/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/tfnsdemo_rg/providers/Microsoft.Network/publicIPAddresses/tfnsdemo-mgmtPIP",
+  "idleTimeoutInMinutes": 4,
+  "ipAddress": "a.b.c.d",
+  "ipConfiguration": {
+    "etag": null,
+(lines removed for brevity)
+```
+
+2. Open your browser and point it to `http://a.b.c.d` and you should see the following page being displayed
+
+![Hello World!](https://github.com/hardjopranoto/citrixadc-onazure-terraform/blob/master/helloworld.png)
+
 
 
 

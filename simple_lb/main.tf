@@ -9,7 +9,7 @@ provider "citrixadc" {
 }
 
 resource "citrixadc_lbvserver" "production_lb" {
-  name        = "productionLB"
+  name        = "helloworldLB"
   ipv46       = var.vip_config["vip"]
   port        = "80"
   servicetype = "HTTP"
