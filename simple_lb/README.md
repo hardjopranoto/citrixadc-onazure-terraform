@@ -11,7 +11,7 @@ This subfolder contains specific example of configuring a simple load balance co
 
 ## Usage
 
-1. Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP` to obtain the Citrix ADC management interface public IP address and you will get an output similar to the following
+1. Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP` to obtain the Citrix ADC management interface public IP address and you will get an output similar to the following and where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
 
 ```
 (lines removed for brevity)
@@ -25,8 +25,6 @@ This subfolder contains specific example of configuring a simple load balance co
     "etag": null,
 (lines removed for brevity)
 ```
-
-  Where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
 
 
 2. Edit `main.tf` and update the content of `main.tf` file
