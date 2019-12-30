@@ -5,7 +5,7 @@ This subfolder contains specific example of deploying Citrix ADC in Azure using 
 - `main.tf` is used to specify the variables, providers and resources required to deploy Citrix ADC VM in Azure. The file also contains the following variables that you can customise:
   - *admin_username* is the admin username for the Citrix ADC
   - *admin_password* is the admin password for the Citrix ADC
-  - *resource_prefix* is the name that will be used as the name in creating the azure resource group, virtual network and virtual machine
+  - *resource_prefix* is the name that will be used as the name in creating the azure resource group, virtual network and virtual machine. The default value is set to `tfnsdemo`
   - *location* is the azure region that the Citrix ADC will be deployed
 - `setup_ip.sh` is a bash script used to create a VIP and a SNIP address on the Citrix ADC
 

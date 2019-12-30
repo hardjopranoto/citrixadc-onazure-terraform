@@ -23,20 +23,15 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 `git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git`
 
-2. Deploy Citrix ADC by following this instruction
+2. Deploy Citrix ADC by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/blob/master/deploy_adc/README.md)
 
-3. Deploy two Ubuntu linux VMs, install NGINX webserver and customise the HTML page by following this instruction
-
-```
-cd citrixadc-onazure-terraform/deploy_webserver
-terraform init
-terraform plan
-terraform apply
-```
+3. Deploy two Ubuntu linux VMs, install NGINX webserver and customise the HTML page by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/blob/master/deploy_webserver/README.md)
 
 4. Create vnet peering between tfdemo-vnet and tfnsdemo-vnet. Follow this instruction on [how to create vnet peering using Azure portal](https://docs.microsoft.com/en-us/azure/virtual-network/quick-create-portal)
 
-5. Create a simple load balancing configuration on the two webservers deployed in Step 3. 
+5. Create a simple load balancing configuration on the two webservers deployed in Step 3 by following this instruction
+
+
 
 
 
