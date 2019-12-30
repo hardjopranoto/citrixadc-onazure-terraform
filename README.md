@@ -51,7 +51,6 @@ Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP` to obtain the
 Then run the following commands
 
 ```
-az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP
 export NS_URL=http://a.b.c.d/
 export NS_USER=nsroot
 export NS_PASSWORD=nspassword
