@@ -1,4 +1,4 @@
-# Step 2 - Deploy Two Webservers
+# Step 3 - Deploy Two Webservers
 This subfolder contains specific example of deploying two Ubuntu Linux VMs, install NGINX webserver and customising the default HTML page
 
 ## Structure
