@@ -16,6 +16,7 @@ This subfolder contains specific example of configuring a simple load balance co
 ```
 az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP 
 
+
 (lines removed for brevity)
   "ddosSettings": null,
   "dnsSettings": null,
@@ -30,5 +31,14 @@ az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP
 
 Where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
 
-2. `terraform plan`
-3. `teraform apply`
+2. Edit `main.tf` and update the content of `main.tf` file
+  - Open Azure Cloud Shell text editor by running the command `code main.tf`
+  - Update the `endpoint` URL with the public IP address you obtain in Step 1 above
+  - Update `username` of Citrix ADC admin username if necessary
+  - Update `password` of Citrix ADC admin password if necessary
+  - `Ctrl+S` to save the file
+  - `Ctrl+Q` to close the text editor
+
+3. `terraform init`
+4. `terraform plan`
+5. `teraform apply`
