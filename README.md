@@ -70,13 +70,15 @@ az network vnet peering create \
 
 6. Commit the configuration to Citrix ADC persistent store by running the following commands in Azure Cloud Shell
 
-```
-pip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP --query ipAddress  --out tsv)
-export NS_URL=http://$pip/
-export NS_USER=nsroot
-export NS_PASSWORD=nspassword
-./ns_commit.sh
-```
+`pip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP --query ipAddress  --out tsv)`
+
+`export NS_URL=http://$pip/`
+
+`export NS_USER=nsroot`
+
+`export NS_PASSWORD=nspassword`
+
+`./ns_commit.sh`
 
 
 ## Validate
