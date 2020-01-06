@@ -19,7 +19,11 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 ## Usage
 
-1. Open Azure Cloud Shell and clone this repository by running the following commands
+0. If you are going to do this lab for the first time, you need to accept Azure Marketplace Legal Terms. You only need to do this once by running the following command in Azure Cloud Shell
+
+`az vm image terms accept --urn citrix:netscalervpx-130:netscaler10enterprise:130.41.28`
+
+1. In Azure Cloud Shell, clone this repository by running the following commands
 
 `git clone https://github.com/hardjopranoto/citrixadc-onazure-terraform.git`
 
@@ -27,7 +31,36 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 3. Deploy two Ubuntu linux VMs, install NGINX webserver and customise the HTML page by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/tree/master/deploy_webserver)
 
-4. Create vnet peering between tfdemo-vnet and tfnsdemo-vnet. Follow this instruction on [how to create vnet peering using Azure portal](https://docs.microsoft.com/en-us/azure/virtual-network/quick-create-portal)
+4. Create vnet peering between tfdemo-vnet and tfnsdemo-vnet by running the following commands in Azure Cloud Shell
+
+```vNet1Id=$(az network vnet show \
+  --resource-group tfdemo_rg \
+  --name tfdemo-vnet \
+  --query id --out tsv)
+```
+
+```vNet2Id=$(az network vnet show \
+  --resource-group tfnsdemo_rg \
+  --name tfnsdemo-vnet \
+  --query id --out tsv)
+```
+
+```az network vnet peering create \
+  --name tfdemovnet-tfnsdemovnet \
+  --resource-group tfdemo_rg \
+  --vnet-name tfdemo-vnet \
+  --remote-vnet $vNet2Id \
+  --allow-vnet-access
+```
+
+```az network vnet peering create \
+  --name tfnsdemovnet-tfdemovnet \
+  --resource-group tfnsdemo_rg \
+  --vnet-name tfnsdemo-vnet \
+  --remote-vnet $vNet1Id \
+  --allow-vnet-access
+```
+
 
 5. Create a simple load balancing configuration on the two webservers deployed in Step 3 by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/tree/master/simple_lb)
 
