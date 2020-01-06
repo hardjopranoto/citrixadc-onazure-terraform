@@ -68,27 +68,11 @@ az network vnet peering create \
 
 5. Create a simple load balancing configuration on the two webservers deployed in Step 3 by following this [instruction](https://github.com/hardjopranoto/citrixadc-onazure-terraform/tree/master/simple_lb)
 
-6. Commit the configuration to Citrix ADC persistent store 
-Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP` to obtain the Citrix ADC management interface public IP address and you will get an output similar to the following and where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
+6. Commit the configuration to Citrix ADC persistent store by running the following commands in Azure Cloud Shell
 
 ```
-(lines removed for brevity)
-  "ddosSettings": null,
-  "dnsSettings": null,
-  "etag": "W/\"731df655-ba5e-46dc-9e8c-ae5618096a2c\"",
-  "id": "/subscriptions/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/tfnsdemo_rg/providers/Microsoft.Network/publicIPAddresses/tfnsdemo-mgmtPIP",
-  "idleTimeoutInMinutes": 4,
-  "ipAddress": "a.b.c.d",
-  "ipConfiguration": {
-    "etag": null,
-(lines removed for brevity)
-```
-
-
-Then run the following commands
-
-```
-export NS_URL=http://a.b.c.d/
+pip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP --query ipAddress  --out tsv)
+export NS_URL=http://$pip/
 export NS_USER=nsroot
 export NS_PASSWORD=nspassword
 ./ns_commit.sh
@@ -98,22 +82,14 @@ export NS_PASSWORD=nspassword
 ## Validate
 Run through the following steps to validate if the deployments have been done correctly and successfully
 
-1. Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-wanPIP` to obtain `a.b.c.d` which is the public VIP address
+1. Run the following commands to obtain the Citrix ADC VIP address
 
 ```
-(lines removed for brevity)
-  "ddosSettings": null,
-  "dnsSettings": null,
-  "etag": "W/\"731df655-ba5e-46dc-9e8c-ae5618096a2c\"",
-  "id": "/subscriptions/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/tfnsdemo_rg/providers/Microsoft.Network/publicIPAddresses/tfnsdemo-mgmtPIP",
-  "idleTimeoutInMinutes": 4,
-  "ipAddress": "a.b.c.d",
-  "ipConfiguration": {
-    "etag": null,
-(lines removed for brevity)
+vip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-wanPIP --query ipAddress --out tsv)
+echo $vip
 ```
 
-2. Open your browser and point it to `http://a.b.c.d` and you should see the following page being displayed
+2. Open your browser and point it to `http://a.b.c.d` where a.b.c.d is the value of the $vip from the step above, and you should see the following page being displayed
 
 ![Hello World!](https://github.com/hardjopranoto/citrixadc-onazure-terraform/blob/master/helloworld.png)
 
