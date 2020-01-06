@@ -33,19 +33,22 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 4. Create vnet peering between tfdemo-vnet and tfnsdemo-vnet by running the following commands in Azure Cloud Shell
 
-```vNet1Id=$(az network vnet show \
+```
+vNet1Id=$(az network vnet show \
   --resource-group tfdemo_rg \
   --name tfdemo-vnet \
   --query id --out tsv)
 ```
 
-```vNet2Id=$(az network vnet show \
+```
+vNet2Id=$(az network vnet show \
   --resource-group tfnsdemo_rg \
   --name tfnsdemo-vnet \
   --query id --out tsv)
 ```
 
-```az network vnet peering create \
+```
+az network vnet peering create \
   --name tfdemovnet-tfnsdemovnet \
   --resource-group tfdemo_rg \
   --vnet-name tfdemo-vnet \
@@ -53,7 +56,8 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
   --allow-vnet-access
 ```
 
-```az network vnet peering create \
+```
+az network vnet peering create \
   --name tfnsdemovnet-tfdemovnet \
   --resource-group tfnsdemo_rg \
   --vnet-name tfnsdemo-vnet \
