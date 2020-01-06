@@ -84,19 +84,11 @@ Run through the following steps to validate if the deployments have been done co
 
 1. Run the following commands to obtain the Citrix ADC VIP address
 
-```
-vip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-wanPIP --query ipAddress --out tsv)
-echo $vip
-```
+`vip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-wanPIP --query ipAddress --out tsv)`
+
+`echo $vip`
 
 2. Open your browser and point it to `http://a.b.c.d` where a.b.c.d is the value of the $vip from the step above, and you should see the following page being displayed
 
 ![Hello World!](https://github.com/hardjopranoto/citrixadc-onazure-terraform/blob/master/helloworld.png)
-
-
-
-
-
-
-
 
