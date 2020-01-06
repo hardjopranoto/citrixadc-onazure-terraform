@@ -2,10 +2,14 @@ terraform {
   required_version = ">= 0.12"
 }
 
+variable "adcmgmt_ip" {
+    type = string
+}
+
 provider "citrixadc" {
   username = "nsroot"
   password = "CtxPa55w0rd!"
-  endpoint = "http://13.73.203.23/"
+  endpoint = "http://${var.adcmgmt_ip}"
 }
 
 resource "citrixadc_lbvserver" "production_lb" {

@@ -11,32 +11,10 @@ This subfolder contains specific example of configuring a simple load balance co
 
 ## Usage
 
-1. Run `az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP` to obtain the Citrix ADC management interface public IP address and you will get an output similar to the following and where `a.b.c.d` is the value of the assigned public IP address for Citrix ADC management
+1. Run the following command in Azure Cloud Shell to get Citrix ADC Management IP and export it into Terraform variable
 
-```
-(lines removed for brevity)
-  "ddosSettings": null,
-  "dnsSettings": null,
-  "etag": "W/\"731df655-ba5e-46dc-9e8c-ae5618096a2c\"",
-  "id": "/subscriptions/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/tfnsdemo_rg/providers/Microsoft.Network/publicIPAddresses/tfnsdemo-mgmtPIP",
-  "idleTimeoutInMinutes": 4,
-  "ipAddress": "a.b.c.d",
-  "ipConfiguration": {
-    "etag": null,
-(lines removed for brevity)
-```
+`export TF_VAR_adcmgmt_ip=$(az network public-ip show -g tfnsdemo_rg -n tfnsdemo-mgmtPIP --query ipAddress --output tsv)`
 
-
-2. Edit `main.tf` and update the content of `main.tf` file
-
-    - Open Azure Cloud Shell text editor by running the command `code main.tf`
-    - Update the `endpoint` URL with the public IP address you obtain in Step 1 above
-    - Update `username` of Citrix ADC admin username if necessary
-    - Update `password` of Citrix ADC admin password if necessary
-    - `Ctrl+S` to save the file
-    - `Ctrl+Q` to close the text editor
-
-
-3. `terraform init`
-4. `terraform plan`
-5. `teraform apply`
+2. `terraform init`
+3. `terraform plan`
+4. `teraform apply`
