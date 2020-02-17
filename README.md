@@ -21,7 +21,7 @@ You also need to copy the [Terraform Provider for Citrix ADC](https://github.com
 
 0. If you are going to do this lab for the first time, you need to accept Azure Marketplace Legal Terms. You only need to do this once by running the following command in Azure Cloud Shell
 
-`az vm image terms accept --urn citrix:netscalervpx-130:netscaler10enterprise:130.41.28`
+`az vm image terms accept --urn citrix:netscalervpx-130:netscaler10enterprise:130.47.24`
 
 1. In Azure Cloud Shell, clone this repository by running the following commands
 

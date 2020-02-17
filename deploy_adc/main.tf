@@ -166,7 +166,7 @@ resource "azurerm_virtual_machine" "vm" {
     publisher = "citrix"
     offer     = "netscalervpx-130"
     sku       = "netscaler10platinum"
-    version   = "130.41.28"
+    version   = "130.47.24"
   }
 
   plan {
