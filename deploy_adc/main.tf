@@ -1,30 +1,5 @@
 # Terraform script to deploy Netscaler in two-arm mode in Azure using azurerm
 
-# Define the variables and default values to be used throughout this script
-variable "admin_username" {
-  default = "nsroot"
-}
-
-variable "admin_password" {
-  default = "CtxPa55w0rd!"
-}
-
-variable "resource_prefix" {
-  default = "tfnsdemo"
-}
-
-# You'll usually want to set this to a region near you.
-variable "location" {
-  default = "australiaeast"
-}
-
-
-
-# Configure the provider.
-provider "azurerm" {
-  version = "~>1.31"
-}
-
 # Create a resource group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_prefix}_rg"
@@ -34,7 +9,7 @@ resource "azurerm_resource_group" "rg" {
 # Create virtual network and three subnets
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_prefix}-vnet"
-  address_space       = ["10.10.0.0/16"]
+  address_space       = ["${var.vnet_range}"]
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -43,13 +18,13 @@ resource "azurerm_subnet" "wansubnet" {
   name                 = "wansubnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "10.10.1.0/24"
+  address_prefix       = var.wan_subnet
 }
 resource "azurerm_subnet" "lansubnet" {
   name                 = "lansubnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "10.10.2.0/24"
+  address_prefix       = var.lan_subnet
 }
 
 # Create public IP for management interface
@@ -122,7 +97,7 @@ resource "azurerm_network_interface" "wannic" {
       name                          = "${var.resource_prefix}-mgmtipconfig"
       subnet_id                     = azurerm_subnet.wansubnet.id
       private_ip_address_allocation = "static"
-      private_ip_address            = "10.10.1.4"
+      private_ip_address            = var.mgmt_ip
       public_ip_address_id          = azurerm_public_ip.mgmtpip.id
       primary                       = true
   }
@@ -131,7 +106,7 @@ resource "azurerm_network_interface" "wannic" {
     name                          = "${var.resource_prefix}-wanipconfig"
     subnet_id                     = azurerm_subnet.wansubnet.id
     private_ip_address_allocation = "static"
-    private_ip_address            = "10.10.1.5"
+    private_ip_address            = var.virtual_ip
     public_ip_address_id          = azurerm_public_ip.wanpip.id
   }
 }
@@ -146,7 +121,7 @@ resource "azurerm_network_interface" "lannic" {
     name                          = "${var.resource_prefix}-lanipconfig"
     subnet_id                     = azurerm_subnet.lansubnet.id
     private_ip_address_allocation = "static"
-    private_ip_address            = "10.10.2.4"
+    private_ip_address            = var.subnet_ip
   }
 }
 
@@ -160,19 +135,19 @@ resource "azurerm_virtual_machine" "vm" {
     "${azurerm_network_interface.lannic.id}"
   ]
   primary_network_interface_id = azurerm_network_interface.wannic.id
-  vm_size               = "Standard_A2"
+  vm_size               = var.vm_size
 
   storage_image_reference {
-    publisher = "citrix"
-    offer     = "netscalervpx-130"
-    sku       = "netscaler10platinum"
-    version   = "130.47.24"
+    publisher = var.publisher
+    offer     = var.offer
+    sku       = var.sku
+    version   = var.ver
   }
 
   plan {
-    name = "netscaler10platinum"
-    publisher = "citrix"
-    product = "netscalervpx-130"
+    name = var.plan_name
+    publisher = var.publisher
+    product = var.plan_product
   }
 
 storage_os_disk {
@@ -193,18 +168,10 @@ storage_os_disk {
   }
 }
 
-resource "null_resource" "setup_ip" {
-  provisioner "local-exec" {
-    environment = {
-      INITIAL_WAIT_SEC    = "360"
-      PUBLIC_NSIP         = azurerm_public_ip.mgmtpip.ip_address
-      INSTANCE_PWD        = var.admin_password
-      VIP_IPADDR          = "10.10.1.5"
-      SNIP_IPADDR         = "10.10.2.4"
-      SUBNET_MASK         = "255.255.255.0"
-    }
+output "mgmt_url" {
+  value = "http://${azurerm_public_ip.mgmtpip.ip_address}"
+}
 
-    interpreter = ["bash"]
-    command     = "setup_ip.sh"
-  }
+output "helloworld_url" {
+  value = "http://${azurerm_public_ip.wanpip.ip_address}"
 }
