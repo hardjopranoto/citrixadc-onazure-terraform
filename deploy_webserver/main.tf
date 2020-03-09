@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "rg" {
 # Create virtual network
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_prefix}-vnet"
-  address_space       = ["10.11.0.0/16"]
+  address_space       = [var.vnet_range]
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -30,7 +30,7 @@ resource "azurerm_subnet" "subnet" {
   name                 = "lan-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "10.11.1.0/24"
+  address_prefix       = var.lan_subnet
 }
 
 # Create Network Security Group and rules
@@ -103,7 +103,7 @@ resource "azurerm_virtual_machine" "vm" {
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.nic[count.index].id]
-  vm_size               = "Standard_DS2_v2"
+  vm_size               = var.vm_size
 
   storage_os_disk {
     name              = "${var.resource_prefix}webserver${count.index}OsDisk"
@@ -113,10 +113,10 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18_04-lts-gen2"
-    version   = "latest"
+    publisher = var.publisher
+    offer     = var.offer
+    sku       = var.sku
+    version   = var.ver
   }
 
   os_profile {
@@ -181,4 +181,3 @@ resource "azurerm_virtual_machine" "vm" {
     ]
   }
 }
-                               

@@ -14,10 +14,45 @@ variable "admin_password" {
 
 variable "resource_prefix" {
   type = string
-  default = "tfdemo"
+  default = "cugc"
 }
 
 # You'll usually want to set this to a region near you.
 variable "location" {
   default = "australiaeast"
+}
+
+variable "vnet_range" {
+  type = string
+  default = "10.12.0.0/16"
+}
+
+variable "lan_subnet" {
+  type = string
+  default = "10.12.1.0/24"
+}
+
+variable "vm_size" {
+  type = string
+  default = "Standard_DS2_v2"
+}
+
+variable "publisher" {
+  type = string
+  default = "Canonical"
+}
+
+variable "offer" {
+  type = string
+  default = "UbuntuServer"
+}
+
+variable "sku" {
+  type = string
+  default = "18_04-lts-gen2"
+}
+
+variable "ver" {
+  type = string
+  default = "latest"
 }
