@@ -9,7 +9,7 @@ variable "admin_password" {
 }
 
 variable "resource_prefix" {
-  default = "cugcdemo"
+  default = "tfnsdemo"
 }
 
 variable "location" {
@@ -28,31 +28,31 @@ variable "helloworld_url" {
 
 variable "vnet_range" {
   type = string
-  default = "10.8.0.0/16"
+  default = "10.10.0.0/16"
 }
 
 variable "wan_subnet" {
   type = string
-  default = "10.8.1.0/24"
+  default = "10.10.1.0/24"
 }
 
 variable "lan_subnet" {
   type = string
-  default = "10.8.2.0/24"
+  default = "10.10.2.0/24"
 }
 
 variable "mgmt_ip" {
   type = string
-  default = "10.8.1.4"
+  default = "10.10.1.4"
 }
 
 variable "virtual_ip" {
   type = string
-  default = "10.8.1.5"
+  default = "10.10.1.5"
 } 
 variable "subnet_ip" {
   type = string
-  default = "10.8.2.4"
+  default = "10.10.2.4"
 }
 
 variable "netmask" {

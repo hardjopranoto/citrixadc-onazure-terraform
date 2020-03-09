@@ -14,7 +14,7 @@ variable "admin_password" {
 
 variable "resource_prefix" {
   type = string
-  default = "cugc"
+  default = "tfdemo"
 }
 
 # You'll usually want to set this to a region near you.
@@ -24,12 +24,12 @@ variable "location" {
 
 variable "vnet_range" {
   type = string
-  default = "10.12.0.0/16"
+  default = "10.11.0.0/16"
 }
 
 variable "lan_subnet" {
   type = string
-  default = "10.12.1.0/24"
+  default = "10.11.1.0/24"
 }
 
 variable "vm_size" {
